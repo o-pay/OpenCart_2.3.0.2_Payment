@@ -3,7 +3,7 @@
 $_['heading_title'] = 'O\'Pay Integration Payment';
 
 // Text
-$_['text_opay'] = '<a href="https://www.allpay.com.tw/" target="_blank"><img src="view/image/payment/opay.png" /></a>';
+$_['text_opay'] = '<a href="https://www.opay.tw/" target="_blank"><img src="view/image/payment/opay.png" /></a>';
 $_['opay_text_success'] = 'Success: You have modified O\'Pay payment module!';
 $_['opay_text_extension'] = 'Extensions';
 $_['opay_text_enabled'] = 'Enabled';

@@ -9,8 +9,8 @@ class OpayCartLibrary
     private $tradeTime = ''; // Trade time
     private $orderPrefix = ''; // MerchantTradeNo prefix
     private $encryptType = ''; // Encrypt type
-    private $productUrl = 'https://payment.allpay.com.tw';
-    private $stageUrl = 'https://payment-stage.allpay.com.tw';
+    private $productUrl = 'https://payment.opay.tw';
+    private $stageUrl = 'https://payment-stage.opay.tw';
     private $functionPath = [
         'checkOut' => '/Cashier/AioCheckOut/V4',
         'queryTrade' => '/Cashier/QueryTradeInfo/V2',
