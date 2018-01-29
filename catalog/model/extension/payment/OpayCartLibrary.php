@@ -9,8 +9,8 @@ class OpayCartLibrary
     private $tradeTime = ''; // Trade time
     private $orderPrefix = ''; // MerchantTradeNo prefix
     private $encryptType = ''; // Encrypt type
-    private $productUrl = 'https://payment.opay.tw';
-    private $stageUrl = 'https://payment-stage.opay.tw';
+    private $productUrl = 'https://payment.allpay.com.tw';
+    private $stageUrl = 'https://payment-stage.allpay.com.tw';
     private $functionPath = [
         'checkOut' => '/Cashier/AioCheckOut/V4',
         'queryTrade' => '/Cashier/QueryTradeInfo/V2',
@@ -75,6 +75,9 @@ class OpayCartLibrary
         $aio->Send['TradeDesc'] = $data['version'];
         $aio->Send['TotalAmount'] = $this->getAmount($data['total']);
         $aio->Send['ChoosePayment'] = $this->getPaymentMethod($paymentType);
+
+         // 接收額外回傳參數 提供電子發票使用 v1.1.1115
+        $aio->Send['NeedExtraPaidInfo'] = 'Y';
 
         // Set the product info
         $aio->Send['Items'][] = [

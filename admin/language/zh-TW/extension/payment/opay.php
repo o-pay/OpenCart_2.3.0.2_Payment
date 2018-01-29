@@ -3,7 +3,7 @@
 $_['heading_title'] = '歐付寶整合金流';
 
 // Text
-$_['text_opay'] = '<a href="https://www.opay.tw/" target="_blank"><img src="view/image/payment/opay.png" /></a>';
+$_['text_opay'] = '<a href="https://www.allpay.com.tw/" target="_blank"><img src="view/image/payment/opay.png" /></a>';
 $_['opay_text_success'] = '成功: 您已修改歐付寶整合金流模組!';
 $_['opay_text_extension'] = '擴充功能';
 $_['opay_text_enabled'] = '啟用';
