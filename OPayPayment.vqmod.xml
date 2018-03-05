@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+   <id>OPay Payment</id>
+   <version>1.0.1220</version>
+   <vqmver>2.X</vqmver>
+   <author>OPay</author>
+   <file name="catalog/view/theme/*/template/checkout/payment_method.tpl">
+       <operation info="payment info input">
+           <search position="after"><![CDATA[
+           <?php echo $payment_method['title']; ?>
+           ]]></search>
+           <add><![CDATA[
+           <?php include("catalog/controller/extension/module/opay_input.php"); ?>
+           ]]></add>
+       </operation>
+   </file>
+   <file name="catalog/controller/checkout/payment_method.php">
+       <operation info="payment info input">
+           <search position="after"><![CDATA[
+           model_extension_extension->getExtensions('payment');
+           ]]></search>
+           <add><![CDATA[
+           include_once("catalog/controller/extension/module/opay.php");
+           ]]></add>
+       </operation>
+   </file>
+</modification>

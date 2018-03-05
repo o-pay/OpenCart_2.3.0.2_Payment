@@ -5,25 +5,9 @@ class ControllerExtensionPaymentOpay extends Controller {
     private $model_name = 'opay';
     private $model_path = 'extension/payment/opay';
     public function index() {
-        // Set the checkout form action
-        $data[$this->prefix . 'action'] = $this->url->link($this->model_path . '/redirect', '', true);
-
         // Get the translations
         $this->load->language($this->model_path);
-        $translation_names = array(
-            $this->prefix . 'text_title',
-            $this->prefix . 'text_payment_methods',
-            $this->prefix . 'text_checkout_button',
-        );
-        foreach ($translation_names as $name) {
-            $data[$name] = $this->language->get($name);
-        }
-        
-        // Get the translation of payment methods
-        $payment_methods = $this->config->get($this->prefix . 'payment_methods');
-        foreach ($payment_methods as $payment_type => $value) {
-            $data['payment_methods'][$payment_type] = $this->language->get($this->prefix . 'text_' . $value);
-        }
+        $data[$this->prefix . 'text_checkout_button'] = $this->language->get($this->prefix . 'text_checkout_button');
         
         // Get the template
         $config_template = $this->config->get('config_template');
@@ -120,7 +104,8 @@ class ControllerExtensionPaymentOpay extends Controller {
                 'orderId' => $order_id,
                 'total' => $order_total,
                 'itemName' => $this->language->get($this->prefix . 'text_item_name'),
-                'version' => $this->prefix . 'module_opencart_1.0.1115',
+                'version' => $this->prefix . 'module_opencart_1.0.0710',
+                'currency' => $this->config->get('config_currency'),
             );
             $helper->checkout($helper_data);
         } catch (Exception $e) {
@@ -182,14 +167,6 @@ class ControllerExtensionPaymentOpay extends Controller {
                     $this->model_checkout_order->addOrderHistory($order_id, $status_id, $comment, true);
                     unset($status_id, $pattern, $comment);
 
-                    if(isset($feedback['card4no']) && !empty($feedback['card4no']))
-                    {
-                        $nNow_Time  = time() ;
-
-                        // 寫入信用卡後四碼
-                        $this->db->query("INSERT INTO `order_extend` (`order_id`, `card_no4`, `createdate`) VALUES ('" . $order_id . "', '" . $feedback['card4no'] . "', '" . $nNow_Time . "' )" );
-                    }
-
                     // Check E-Invoice model
                     $opay_invoice_status = $this->config->get('opayinvoice_status');
                     $ecpay_invoice_status = $this->config->get('ecpayinvoice_status');
@@ -222,10 +199,10 @@ class ControllerExtensionPaymentOpay extends Controller {
                     $this->model_checkout_order->addOrderHistory($order_id, $status_id, $comment);
                     unset($status_id, $pattern, $comment);
                     break;
-                // Barcode/CVS get code
+                // CVS get code
                 case 3:
                     $status_id = $order_status_id;
-                    $pattern = $this->language->get($this->prefix . 'text_barcode_comment');
+                    $pattern = $this->language->get($this->prefix . 'text_cvs_comment');
                     $comment = $helper->getObtainingCodeComment($pattern, $feedback);
                     $this->model_checkout_order->addOrderHistory($order_id, $status_id, $comment);
                     unset($status_id, $pattern, $comment);
