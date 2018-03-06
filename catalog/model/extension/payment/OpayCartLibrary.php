@@ -76,6 +76,9 @@ class OpayCartLibrary
         $aio->Send['TotalAmount'] = $this->getAmount($data['total']);
         $aio->Send['ChoosePayment'] = $this->getPaymentMethod($paymentType);
 
+         // 接收額外回傳參數 提供電子發票使用 v1.1.1115
+        $aio->Send['NeedExtraPaidInfo'] = 'Y';
+
         // Set the product info
         $aio->Send['Items'][] = [
             'Name' => $data['itemName'],

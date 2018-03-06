@@ -17,7 +17,6 @@ $_['opay_text_credit_24'] = 'Credit(24 Installments)';
 $_['opay_text_webatm'] = 'WEB-ATM';
 $_['opay_text_atm'] = 'ATM';
 $_['opay_text_cvs'] = 'CVS';
-$_['opay_text_tenpay'] = 'Tenpay';
 $_['opay_text_topupused'] = 'TopUpUsed';
 
 // Entry

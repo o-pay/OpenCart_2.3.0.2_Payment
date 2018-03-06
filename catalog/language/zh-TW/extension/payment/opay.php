@@ -12,7 +12,6 @@ $_['opay_text_credit_24'] = '信用卡(24期)';
 $_['opay_text_webatm'] = '網路ATM';
 $_['opay_text_atm'] = 'ATM';
 $_['opay_text_cvs'] = '超商代碼';
-$_['opay_text_tenpay'] = '財付通';
 $_['opay_text_topupused'] = '儲值/餘額消費';
 $_['opay_text_item_name'] = '網路商品一批';
 $_['opay_text_payment_result_comment'] = '付款結果 : (%s)%s';
