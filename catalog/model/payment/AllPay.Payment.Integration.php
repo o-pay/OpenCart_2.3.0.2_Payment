@@ -1137,12 +1137,10 @@ Abstract class Verification
 
         if (sizeof($arParameters['Items']) > 0) {
             foreach ($arParameters['Items'] as $keys => $value) {
-                $name = (isset($arParameters['Items'][$keys]['Name'])) ? $arParameters['Items'][$keys]['Name'] : '';
-                $price = (isset($arParameters['Items'][$keys]['Price'])) ? $arParameters['Items'][$keys]['Price'] : '';
-                $currency = (isset($arParameters['Items'][$keys]['Currency'])) ? $arParameters['Items'][$keys]['Currency'] : '';
-                $quantity = (isset($arParameters['Items'][$keys]['Quantity'])) ? $arParameters['Items'][$keys]['Quantity'] : '';
-                $szItemName .= sprintf('#%s %d %s x %u', $name, $price, $currency, $quantity);
-                $arParameters['ItemURL'] = (isset($arParameters['Items'][$keys]['URL'])) ? $arParameters['Items'][$keys]['URL'] : '';
+                $szItemName .= vsprintf('#%s %d %s x %u', $arParameters['Items'][$keys]);
+                if (!array_key_exists('ItemURL', $arParameters)) {
+                    $arParameters['ItemURL'] = $arParameters['Items'][$keys]['URL'];
+                }
             }
 
             if (strlen($szItemName) > 0) {
@@ -1508,7 +1506,7 @@ class allPay_Tenpay extends Verification
 class allPay_Credit extends Verification
 {
     public $arPayMentExtend = array(
-                                    "CreditInstallment" => '',
+                                    "CreditInstallment" => 0,
                                     "InstallmentAmount" => 0, 
                                     "Redeem"            => FALSE, 
                                     "PeriodAmount"      => '',
