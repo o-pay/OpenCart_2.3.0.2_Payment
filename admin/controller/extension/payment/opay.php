@@ -51,7 +51,6 @@ class ControllerExtensionPaymentOpay extends Controller {
             $this->prefix . 'text_webatm',
             $this->prefix . 'text_atm',
             $this->prefix . 'text_cvs',
-            $this->prefix . 'text_tenpay',
             $this->prefix . 'text_topupused',
 
             $this->prefix . 'entry_status',
@@ -184,4 +183,24 @@ class ControllerExtensionPaymentOpay extends Controller {
         
         return !$this->error; 
     }
+
+
+    public function install() 
+    {
+        
+        // card_no4 記錄信用卡後四碼提供電子發票開立使用
+
+        $this->db->query("
+            CREATE TABLE IF NOT EXISTS `order_extend` (
+              `order_id` INT(11) NOT NULL,
+              `card_no4` INT(4) NOT NULL,       
+              `createdate` INT(10)  NOT NULL
+            ) DEFAULT COLLATE=utf8_general_ci;");
+    }
+
+    public function uninstall() 
+    {
+            //$this->db->query("DROP TABLE IF EXISTS `order_extend`;");   
+    }
+
 }

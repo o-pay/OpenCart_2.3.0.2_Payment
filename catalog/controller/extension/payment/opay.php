@@ -104,7 +104,7 @@ class ControllerExtensionPaymentOpay extends Controller {
                 'orderId' => $order_id,
                 'total' => $order_total,
                 'itemName' => $this->language->get($this->prefix . 'text_item_name'),
-                'version' => $this->prefix . 'module_opencart_1.0.0710',
+                'version' => $this->prefix . 'module_opencart_1.0.1115',
                 'currency' => $this->config->get('config_currency'),
             );
             $helper->checkout($helper_data);
@@ -166,6 +166,14 @@ class ControllerExtensionPaymentOpay extends Controller {
                     $comment = $helper->getPaymentSuccessComment($pattern, $feedback);
                     $this->model_checkout_order->addOrderHistory($order_id, $status_id, $comment, true);
                     unset($status_id, $pattern, $comment);
+
+                    if(isset($feedback['card4no']) && !empty($feedback['card4no']))
+                    {
+                        $nNow_Time  = time() ;
+
+                        // 寫入信用卡後四碼
+                        $this->db->query("INSERT INTO `order_extend` (`order_id`, `card_no4`, `createdate`) VALUES ('" . $order_id . "', '" . $feedback['card4no'] . "', '" . $nNow_Time . "' )" );
+                    }
 
                     // Check E-Invoice model
                     $opay_invoice_status = $this->config->get('opayinvoice_status');

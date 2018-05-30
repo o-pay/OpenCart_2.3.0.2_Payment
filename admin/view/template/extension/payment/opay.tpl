@@ -135,11 +135,6 @@
                                 &nbsp;<?php echo $opay_text_cvs; ?>
                             </label>
                             <br />
-                            <input type="checkbox" name="opay_payment_methods[Tenpay]" value="tenpay"<?php if (isset($opay_payment_methods['Tenpay'])) { echo ' checked="checked"'; }    ?> />
-                            <label class="control-label" for="input-payment-methods">
-                                &nbsp;<?php echo $opay_text_tenpay; ?>
-                            </label>
-                            <br />
                             <input type="checkbox" name="opay_payment_methods[TopUpUsed]" value="topupused"<?php if (isset($opay_payment_methods['TopUpUsed'])) { echo ' checked="checked"'; }    ?> />
                             <label class="control-label" for="input-payment-methods">
                                 &nbsp;<?php echo $opay_text_topupused; ?>
